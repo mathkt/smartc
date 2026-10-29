@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>7단원 입체도형의 성질</title>
+<style>
+:root{--g:#0a9b78;--gd:#077a5e;--bg:#f4f8f6;--ink:#1f2a27;--mut:#6b7a75;--line:#d5e2dc;--ok:#7bd389;--retry:#ffe27a;--bad:#ff9a9a;--none:#e6ebe9}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans KR",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:17px}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:1100px;margin:0 auto;padding:14px}
+.top{display:flex;align-items:center;gap:10px;background:var(--g);color:#fff;padding:10px 14px;position:sticky;top:0;z-index:5}
+.top h1{font-size:18px;margin:0;flex:1}
+.top button{background:#fff3;color:#fff;border:1px solid #fff8;border-radius:8px;padding:6px 12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.btn{background:var(--g);color:#fff;border:0;border-radius:10px;padding:12px 18px;font-weight:700}
+.btn:disabled{background:#aaa}
+.btn.sub{background:#fff;color:var(--gd);border:2px solid var(--g)}
+.btn.sm{padding:6px 12px;font-size:15px}
+input[type=text],input[type=password],textarea{font:inherit;padding:11px 12px;border:2px solid var(--line);border-radius:10px;width:100%}
+input:focus,textarea:focus{outline:none;border-color:var(--g)}
+.login{max-width:380px;margin:8vh auto}
+.login h2{text-align:center;color:var(--gd)}
+.err{color:#c0392b;margin:8px 0;min-height:1.2em}
+.lesson{display:flex;align-items:center;gap:12px;cursor:pointer}
+.lesson:hover{border-color:var(--g)}
+.lesson .t{flex:1}
+.lesson small{color:var(--mut)}
+.bar{height:10px;background:var(--none);border-radius:6px;overflow:hidden;min-width:120px}
+.bar i{display:block;height:100%;background:var(--g)}
+.qhead{display:flex;gap:8px;align-items:baseline;margin-bottom:6px}
+.ref{background:#e3f4ee;color:var(--gd);font-weight:700;border-radius:8px;padding:2px 9px;font-size:14px;white-space:nowrap}
+.field{display:flex;align-items:center;gap:8px;margin:7px 0}
+.field label{min-width:110px;color:var(--mut);font-size:15px}
+.field input{max-width:260px}
+.mb{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.mb button{background:#eef6f3;border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-size:16px;min-width:40px}
+.mb button:active{background:var(--g);color:#fff}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.opt{border:2px solid var(--line);background:#fff;border-radius:10px;padding:9px 14px}
+.opt.sel{border-color:var(--g);background:#e3f4ee;font-weight:700}
+.sent{min-height:54px;border:2px dashed var(--g);border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+.sent .ph{color:var(--mut)}
+.chip{background:#fff;border:2px solid var(--line);border-radius:20px;padding:7px 13px}
+.chip.in{background:#e3f4ee;border-color:var(--g)}
+.res{margin-top:8px;padding:9px 12px;border-radius:10px}
+.res.ok{background:#e6f8e9;color:#1d6b2b}
+.res.no{background:#fdeaea;color:#a02c2c}
+.hint{background:#fff8dc;border-left:4px solid #e8b800;padding:8px 12px;margin:6px 0;border-radius:6px;font-size:15px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.act{background:#f0f7ff;border:2px dashed #8ab6e6;border-radius:12px;padding:20px;text-align:center;color:#3b6aa0}
+.figure{background:#fafafa;border:1px dashed var(--line);border-radius:10px;padding:10px;color:var(--mut);font-size:14px;margin:6px 0}
+/* teacher */
+table.grid{border-collapse:collapse;font-size:15px}
+.grid th,.grid td{border:1px solid var(--line);padding:6px 8px;text-align:center;white-space:nowrap}
+.grid th{background:#eef6f3;position:sticky;top:0}
+.grid td.name{text-align:left;position:sticky;left:0;background:#fff}
+.c-ok{background:var(--ok)}.c-retry{background:var(--retry)}.c-wrong{background:var(--bad)}.c-none{background:var(--none);color:#999}
+.grid td[data-q]{cursor:pointer}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.tabs button{border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px}
+.tabs button.on{border-color:var(--g);background:#e3f4ee;font-weight:700}
+.scroll{overflow:auto;max-height:70vh;border:1px solid var(--line);border-radius:10px;background:#fff}
+.modal{position:fixed;inset:0;background:#0007;display:flex;align-items:center;justify-content:center;z-index:20}
+.modal>div{background:#fff;border-radius:14px;padding:18px;max-width:560px;width:92%;max-height:80vh;overflow:auto}
+.legend span{display:inline-block;padding:2px 10px;border-radius:6px;margin-right:6px;font-size:14px}
+code{background:#eef2f0;padding:1px 6px;border-radius:5px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* ============================================================
+   1. Firebase 설정 — 새로 만든 프로젝트의 설정값을 여기에 붙여넣기
+   ============================================================ */
+const FB_CONFIG = {
+  apiKey: "AIzaSyBJm3hCRicESIYrs91WFb5H2jEeXYa9wkk",
+  authDomain: "math-unit7.firebaseapp.com",
+  projectId: "math-unit7",
+  storageBucket: "math-unit7.firebasestorage.app",
+  messagingSenderId: "364015187176",
+  appId: "1:364015187176:web:fa7701778b51387d2a855d"
+};
+
+/* ============================================================
+   2. 문항 데이터 (교과서 7단원)
+   type: fields(입력칸 여러 개) / multi(보기 여러 개 선택) / chips(문장 조각 클릭)
+   ans: 허용하는 답 목록(공백·단위·pi/π 표기 차이는 자동 처리)
+   img: 그림 파일 경로를 넣으면 문제 위에 표시 (예: "img/p208-1.png")
+   ============================================================ */
+const LESSONS = [
+  { id:'L1', title:'1차시 · 7.0 준비 + 7.1 다면체의 뜻', page:'208~214쪽',
+    activity:'여기에 3D 도형 활동(면·모서리·꼭짓점 클릭해서 세기)이 들어갑니다. 다음 단계에서 추가합니다.',
+    questions:[
+    { id:'1-p1a', short:'준비1⑴', ref:'208쪽 준비해요 1⑴', text:'교과서 208쪽 그림 ⑴ 입체도형에 대해 표를 완성하시오.',
+      type:'fields', fields:[
+        {label:'입체도형의 이름', ans:['삼각기둥']},
+        {label:'밑면의 모양', ans:['삼각형']},
+        {label:'밑면의 개수', ans:['2']} ],
+      hints:['밑면은 서로 평행하고 합동인 면이에요.','그림 ⑴의 위아래 면은 어떤 다각형인가요?','기둥의 이름은 "밑면의 모양 + 기둥"으로 붙여요.'] },
+    { id:'1-p1b', short:'준비1⑵', ref:'208쪽 준비해요 1⑵', text:'교과서 208쪽 그림 ⑵ 입체도형에 대해 표를 완성하시오.',
+      type:'fields', fields:[
+        {label:'입체도형의 이름', ans:['원뿔']},
+        {label:'밑면의 모양', ans:['원']},
+        {label:'밑면의 개수', ans:['1']} ],
+      hints:['뿔은 밑면이 한 개예요.','밑면은 둥근 모양이에요.','꼭짓점이 하나이고 밑면이 원인 입체도형이에요.'] },
+    { id:'1-p2', short:'준비2', ref:'208쪽 준비해요 2', text:'전개도로 만든 직육면체(가로 4cm, 세로 2cm, 높이 5cm)의 겉넓이와 부피를 각각 구하시오.',
+      type:'fields', fields:[
+        {label:'겉넓이 (cm²)', ans:['76']},
+        {label:'부피 (cm³)', ans:['40']} ],
+      hints:['직육면체의 부피 = 가로 × 세로 × 높이','겉넓이는 서로 합동인 면 3쌍의 넓이의 합이에요. 4×2, 2×5, 4×5를 구해 보세요.','겉넓이 = (8 + 10 + 20) × 2'] },
+    { id:'1-p3', short:'준비3', ref:'209쪽 준비해요 3', text:'밑면의 반지름이 3cm, 높이가 5cm인 원기둥의 전개도에서 □ 안에 알맞은 수를 써넣으시오.',
+      type:'fields', fields:[
+        {label:'밑면 원의 반지름 (cm)', ans:['3']},
+        {label:'옆면 세로 (cm)', ans:['5']},
+        {label:'옆면 가로 (cm)', ans:['6π'], unit:'cm'} ],
+      hints:['옆면의 세로는 원기둥의 높이와 같아요.','옆면의 가로는 밑면 원의 둘레와 같아요.','원의 둘레 = 2 × π × 반지름'] },
+    { id:'1-m1a', short:'문제1⑴', ref:'210쪽 문제 1⑴', text:'오각기둥은 몇 면체인지 쓰고, 모서리와 꼭짓점의 개수를 각각 구하시오.',
+      type:'fields', fields:[
+        {label:'몇 면체', ans:['칠면체','7면체']},
+        {label:'모서리 개수', ans:['15']},
+        {label:'꼭짓점 개수', ans:['10']} ],
+      hints:['오각기둥의 면은 밑면 2개 + 옆면 몇 개일까요?','밑면(오각형)의 변이 5개씩이고, 옆면 사이의 모서리도 있어요.','모서리 = 5 + 5 + 5, 꼭짓점 = 5 + 5'] },
+    { id:'1-m1b', short:'문제1⑵', ref:'210쪽 문제 1⑵', text:'사각뿔은 몇 면체인지 쓰고, 모서리와 꼭짓점의 개수를 각각 구하시오.',
+      type:'fields', fields:[
+        {label:'몇 면체', ans:['오면체','5면체']},
+        {label:'모서리 개수', ans:['8']},
+        {label:'꼭짓점 개수', ans:['5']} ],
+      hints:['사각뿔의 면은 밑면 1개 + 옆면 4개예요.','밑면의 변 4개, 꼭짓점과 밑면을 잇는 모서리 4개예요.','꼭짓점 = 밑면의 4개 + 맨 위 1개'] },
+    { id:'1-c1', short:'넓히기', ref:'213쪽 생각 넓히기', text:'교과서 213쪽 오른쪽 다면체의 모든 면은 합동인 정삼각형이다. 이 다면체가 정다면체인지 아닌지 말하고 그 이유를 설명하시오. 조각을 눌러 문장을 완성하세요.',
+      type:'chips',
+      chips:[
+        {id:'C', t:'모든 면이 합동인 정삼각형이지만'},
+        {id:'D', t:'꼭짓점마다 모인 면의 개수가 같지 않으므로'},
+        {id:'E', t:'면이 6개이므로'},
+        {id:'F', t:'각 꼭짓점에 모인 면의 개수가 모두 같으므로'},
+        {id:'A', t:'정다면체가 아니다.'},
+        {id:'B', t:'정다면체이다.'} ],
+      accept:[['C','D','A'],['D','A']],
+      hints:['정다면체의 두 조건을 떠올려 보세요: 모든 면이 합동인 정다각형, 각 꼭짓점에 모인 면의 개수가 같다.','그림에서 위·아래 꼭짓점과 가운데 꼭짓점에 모인 면의 개수를 세어 보세요.','첫 번째 조건은 만족하지만 두 번째 조건은 만족하지 않아요.'] },
+    { id:'1-h2a', short:'해결2⑴', ref:'214쪽 해결해요 2⑴', text:'면이 8개인 다면체를 보기에서 모두 고르시오.',
+      type:'multi', options:[['ㄱ','ㄱ. 삼각기둥'],['ㄴ','ㄴ. 칠각뿔'],['ㄷ','ㄷ. 오각뿔대'],['ㄹ','ㄹ. 육각뿔대'],['ㅁ','ㅁ. 정십이면체'],['ㅂ','ㅂ. 정이십면체']],
+      answer:['ㄴ','ㄹ'],
+      hints:['각 입체도형의 면의 개수를 하나씩 세어 보세요.','n각뿔의 면은 (n+1)개, n각뿔대의 면은 (n+2)개예요.','칠각뿔 = 7+1, 육각뿔대 = 6+2'] },
+    { id:'1-h2b', short:'해결2⑵', ref:'214쪽 해결해요 2⑵', text:'옆면이 직사각형이 아닌 사다리꼴인 다면체를 보기에서 모두 고르시오.',
+      type:'multi', options:[['ㄱ','ㄱ. 삼각기둥'],['ㄴ','ㄴ. 칠각뿔'],['ㄷ','ㄷ. 오각뿔대'],['ㄹ','ㄹ. 육각뿔대'],['ㅁ','ㅁ. 정십이면체'],['ㅂ','ㅂ. 정이십면체']],
+      answer:['ㄷ','ㄹ'],
+      hints:['옆면이 사다리꼴인 입체도형의 종류를 떠올려 보세요.','기둥의 옆면은 직사각형, 뿔의 옆면은 삼각형이에요.','각뿔대의 옆면이 사다리꼴이에요.'] },
+    { id:'1-h2c', short:'해결2⑶', ref:'214쪽 해결해요 2⑶', text:'모든 면이 삼각형인 다면체를 보기에서 모두 고르시오.',
+      type:'multi', options:[['ㄱ','ㄱ. 삼각기둥'],['ㄴ','ㄴ. 칠각뿔'],['ㄷ','ㄷ. 오각뿔대'],['ㄹ','ㄹ. 육각뿔대'],['ㅁ','ㅁ. 정십이면체'],['ㅂ','ㅂ. 정이십면체']],
+      answer:['ㅂ'],
+      hints:['밑면까지 포함해서 모든 면이 삼각형이어야 해요.','칠각뿔의 밑면은 칠각형이에요.','정다면체 중에서 면이 정삼각형인 것을 떠올려 보세요.'] },
+    { id:'1-h5', short:'해결5⑴', ref:'214쪽 해결해요 5⑴', text:'모든 면이 정삼각형이고, 한 꼭짓점에 모인 면이 3개인 정다면체의 이름을 쓰시오.',
+      type:'fields', fields:[{label:'정다면체의 이름', ans:['정사면체']}],
+      hints:['정삼각형 3개가 한 꼭짓점에 모이는 경우예요.','정삼각형이 모인 개수가 3, 4, 5개인 세 가지 정다면체가 있어요.','3개가 모이면 가장 면의 수가 적은 정다면체예요.'] }
+    ]},
+  { id:'L2', title:'2차시 · 7.1 각뿔대, 정다면체', page:'211~213쪽', questions:[] },
+  { id:'L3', title:'3차시 · 7.2 회전체의 뜻', page:'215쪽', questions:[] },
+  { id:'L4', title:'4차시 · 7.2 회전체의 단면, 원뿔대', page:'216~218쪽', questions:[] },
+  { id:'L5', title:'5차시 · 7.3 기둥의 겉넓이', page:'219~220쪽', questions:[] },
+  { id:'L6', title:'6차시 · 7.3 뿔의 겉넓이', page:'221~223쪽', questions:[] },
+  { id:'L7', title:'7차시 · 7.4 기둥의 부피', page:'224~225쪽', questions:[] },
+  { id:'L8', title:'8차시 · 7.4 뿔의 부피', page:'226~228쪽', questions:[] },
+  { id:'L9', title:'9차시 · 7.5 구의 겉넓이', page:'229쪽', questions:[] },
+  { id:'L10', title:'10차시 · 7.5 구의 부피', page:'230~232쪽', questions:[] },
+  { id:'L11', title:'11차시 · 단원 마무리', page:'233~235쪽', questions:[] },
+  { id:'L12', title:'12차시 · 프로젝트 새 활용 물건', page:'236~238쪽', questions:[] }
+];
+const ALLQ = LESSONS.flatMap(l=>l.questions.map(q=>({...q,lesson:l.id})));
+const MATH_KEYS = ['π','²','³','√','×','÷','/','(',')','.',',','cm','cm²','cm³'];
+
+/* ============================================================
+   3. 유틸
+   ============================================================ */
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function norm(s){
+  s=String(s).toLowerCase().replace(/\s+/g,'');
+  s=s.replace(/cm\^?[23]|cm[²³]|㎠|㎤|cm/g,'');
+  s=s.replace(/pi/g,'π').replace(/\^2/g,'²').replace(/\^3/g,'³').replace(/[*×]/g,'');
+  s=s.replace(/개$/,'');
+  return s;
+}
+async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+const clsOf = id=>String(id).slice(0,-2);
+const fmtT = t=>{const d=new Date(t);return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
+
+let db=null, me=null, myAtt={}, lastInput=null, chipState={}, curLesson=null;
+
+/* ============================================================
+   4. 시작 / 설정 안내
+   ============================================================ */
+function init(){
+  if(!FB_CONFIG.apiKey){
+    $('#app').innerHTML=`<div class="wrap"><div class="card"><h2>Firebase 설정이 필요합니다</h2>
+    <p>파일 위쪽 <code>FB_CONFIG</code>에 새 Firebase 프로젝트의 설정값을 붙여넣으세요.</p></div></div>`;return;
+  }
+  firebase.initializeApp(FB_CONFIG);
+  db=firebase.firestore();
+  db.enablePersistence({synchronizeTabs:true}).catch(()=>{});
+  const s=localStorage.getItem('me');
+  if(s){me=JSON.parse(s);loadMine().then(showHome);}else showLogin();
+}
+async function loadMine(){
+  myAtt={};
+  try{const r=await db.collection('attempts').where('sid','==',me.id).get();r.forEach(d=>{myAtt[d.data().qid]=d.data()});}catch(e){}
+}
+
+/* ============================================================
+   5. 로그인
+   ============================================================ */
+function showLogin(){
+  $('#app').innerHTML=`<div class="wrap login"><div class="card">
+  <h2>7단원 입체도형의 성질</h2>
+  <p>학번과 이름을 입력하세요.</p>
+  <input id="lid" type="text" inputmode="numeric" placeholder="학번 (예: 10305)"><div style="height:8px"></div>
+  <input id="lname" type="text" placeholder="이름">
+  <div class="err" id="lerr"></div>
+  <button class="btn" style="width:100%" id="lgo">입장</button>
+  <p style="text-align:center;margin-top:16px"><a href="#" id="tlink" style="color:var(--mut);font-size:14px">교사 화면</a></p>
+  </div></div>`;
+  $('#lgo').onclick=doLogin;
+  $('#lname').onkeydown=e=>{if(e.key==='Enter')doLogin()};
+  $('#tlink').onclick=e=>{e.preventDefault();teacherLogin()};
+}
+async function doLogin(){
+  const id=$('#lid').value.trim(), name=$('#lname').value.trim().replace(/\s+/g,'');
+  if(!id||!name){$('#lerr').textContent='학번과 이름을 모두 입력하세요.';return;}
+  $('#lgo').disabled=true;
+  try{
+    const d=await db.collection('roster').doc(id).get();
+    if(!d.exists){$('#lerr').textContent='명단에 없는 학번입니다.';$('#lgo').disabled=false;return;}
+    if(d.data().name.replace(/\s+/g,'')!==name){$('#lerr').textContent='학번과 이름이 맞지 않습니다.';$('#lgo').disabled=false;return;}
+    me={id,name:d.data().name,cls:clsOf(id)};
+    localStorage.setItem('me',JSON.stringify(me));
+    await loadMine();showHome();
+  }catch(e){$('#lerr').textContent='접속에 실패했습니다. 인터넷 연결을 확인하세요.';$('#lgo').disabled=false;}
+}
+function logout(){localStorage.removeItem('me');me=null;myAtt={};showLogin();}
+
+/* ============================================================
+   6. 학생 화면 — 목차
+   ============================================================ */
+function topbar(title,back){
+  return `<div class="top">${back?'<button id="back">← 목차</button>':''}<h1>${esc(title)}</h1><span>${esc(me.name)}</span><button id="lo">나가기</button></div>`;
+}
+function showHome(){
+  curLesson=null;
+  const done=ALLQ.filter(q=>myAtt[q.id]?.correct).length;
+  let h=topbar('7. 입체도형의 성질');
+  h+=`<div class="wrap"><div class="card"><div class="row"><b>내 진도</b><div class="bar" style="flex:1"><i style="width:${ALLQ.length?done/ALLQ.length*100:0}%"></i></div><span>${done} / ${ALLQ.length}문항</span></div></div>`;
+  LESSONS.forEach(l=>{
+    const n=l.questions.length, c=l.questions.filter(q=>myAtt[q.id]?.correct).length;
+    h+=`<div class="card lesson" data-l="${l.id}" style="${n?'':'opacity:.5'}"><div class="t"><b>${esc(l.title)}</b><br><small>교과서 ${esc(l.page)}</small></div>
+    ${n?`<div class="bar"><i style="width:${c/n*100}%"></i></div><span>${c}/${n}</span>`:'<small>준비 중</small>'}</div>`;
+  });
+  h+='</div>';
+  $('#app').innerHTML=h;
+  $('#lo').onclick=logout;
+  document.querySelectorAll('.lesson').forEach(e=>e.onclick=()=>{const l=LESSONS.find(x=>x.id===e.dataset.l);if(l.questions.length)showLesson(l)});
+}
+
+/* ============================================================
+   7. 학생 화면 — 차시와 문항
+   ============================================================ */
+function showLesson(l){
+  curLesson=l;chipState={};
+  let h=topbar(l.title,true)+`<div class="wrap">`;
+  h+=`<div class="act">${esc(l.activity||'이 차시의 활동은 준비 중입니다.')}</div>`;
+  l.questions.forEach(q=>h+=`<div class="card" id="card-${q.id}">${cardHtml(q)}</div>`);
+  h+='</div>';
+  $('#app').innerHTML=h;
+  $('#back').onclick=()=>showHome();$('#lo').onclick=logout;
+  wireLesson();
+}
+function mathBar(){return `<div class="mb">${MATH_KEYS.map(k=>`<button type="button" class="mk" data-k="${k}">${k}</button>`).join('')}</div>`;}
+
+function cardHtml(q){
+  const a=myAtt[q.id]||{}, done=!!a.correct;
+  let h=`<div class="qhead"><span class="ref">${esc(q.ref)}</span></div>`;
+  if(q.img)h+=`<img src="${esc(q.img)}" style="max-width:100%;border-radius:8px">`;
+  h+=`<div style="margin:4px 0 8px">${esc(q.text)}</div>`;
+  if(q.type==='fields'){
+    q.fields.forEach((f,i)=>{h+=`<div class="field"><label>${esc(f.label)}</label><input type="text" class="ans" data-q="${q.id}" data-i="${i}" autocomplete="off" ${done?'disabled':''} ${f.unit?`placeholder="${f.unit}"`:''}></div>`});
+    if(!done)h+=mathBar();
+  }else if(q.type==='multi'){
+    h+=`<div class="opts" data-q="${q.id}">${q.options.map(o=>`<button type="button" class="opt" data-v="${o[0]}" ${done?'disabled':''}>${esc(o[1])}</button>`).join('')}</div>`;
+  }else if(q.type==='chips'){
+    const sel=chipState[q.id]||[];
+    h+=`<div class="sent">${sel.length?sel.map(id=>`<button type="button" class="chip in" data-q="${q.id}" data-c="${id}" ${done?'disabled':''}>${esc(q.chips.find(c=>c.id===id).t)}</button>`).join(''):'<span class="ph">아래 조각을 눌러 문장을 만드세요</span>'}</div>`;
+    h+=`<div class="opts">${shuffled(q).filter(c=>!sel.includes(c.id)).map(c=>`<button type="button" class="chip" data-q="${q.id}" data-c="${c.id}" ${done?'disabled':''}>${esc(c.t)}</button>`).join('')}</div>`;
+    if(!done&&sel.length)h+=`<button class="btn sub sm" data-act="clear" data-q="${q.id}">다시 만들기</button> `;
+  }
+  if(!done)h+=`<div class="row" style="margin-top:8px"><button class="btn" data-act="submit" data-q="${q.id}">제출</button><button class="btn sub" data-act="hint" data-q="${q.id}" ${(a.hints||0)>=3?'disabled':''}>힌트 (${a.hints||0}/3)</button></div>`;
+  for(let i=0;i<(a.hints||0);i++)h+=`<div class="hint">힌트 ${i+1}. ${esc(q.hints[i])}</div>`;
+  if(done)h+=`<div class="res ok">정답입니다! (${a.tries}번째 시도)</div>`;
+  else if(a.lastResult)h+=`<div class="res no">${a.lastResult}</div>`;
+  return h;
+}
+const shufCache={};
+function shuffled(q){
+  if(!shufCache[q.id]){const a=q.chips.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}shufCache[q.id]=a;}
+  return shufCache[q.id];
+}
+function redraw(q){$('#card-'+q.id).innerHTML=cardHtml(q);}
+
+function wireLesson(){
+  const app=$('#app');
+  app.onfocusin=e=>{if(e.target.classList.contains('ans'))lastInput=e.target};
+  app.onclick=e=>{
+    const t=e.target.closest('button');if(!t)return;
+    if(t.classList.contains('mk')){
+      const k=t.dataset.k, card=t.closest('.card');
+      let inp=(lastInput&&card.contains(lastInput))?lastInput:card.querySelector('input.ans');
+      if(!inp||inp.disabled)return;
+      const s=inp.selectionStart??inp.value.length, en=inp.selectionEnd??s;
+      inp.value=inp.value.slice(0,s)+k+inp.value.slice(en);
+      inp.focus();const p=s+k.length;inp.setSelectionRange(p,p);lastInput=inp;return;
+    }
+    if(t.classList.contains('opt')&&!t.disabled){t.classList.toggle('sel');return;}
+    if(t.classList.contains('chip')&&t.dataset.c){
+      const q=ALLQ.find(x=>x.id===t.dataset.q);
+      const sel=chipState[q.id]=chipState[q.id]||[];
+      const i=sel.indexOf(t.dataset.c);
+      if(i>=0)sel.splice(i,1);else sel.push(t.dataset.c);
+      redraw(q);return;
+    }
+    const act=t.dataset.act;if(!act)return;
+    const q=ALLQ.find(x=>x.id===t.dataset.q);
+    if(act==='clear'){chipState[q.id]=[];redraw(q);}
+    if(act==='hint')useHint(q);
+    if(act==='submit')submitAns(q);
+  };
+}
+
+function rec(q){
+  return myAtt[q.id]=myAtt[q.id]||{sid:me.id,name:me.name,cls:me.cls,qid:q.id,lesson:q.lesson,tries:0,hints:0,correct:false,log:[]};
+}
+function save(q){
+  const a=myAtt[q.id];a.updatedAt=Date.now();
+  db.collection('attempts').doc(me.id+'_'+q.id).set(a,{merge:true}).catch(()=>{});
+}
+function useHint(q){
+  const a=rec(q);if(a.hints<3)a.hints++;
+  save(q);redraw(q);
+}
+function submitAns(q){
+  const card=$('#card-'+q.id);let ok=false,given='',msg='';
+  if(q.type==='fields'){
+    const vals=[...card.querySelectorAll('input.ans')].map(i=>i.value);
+    if(vals.every(v=>!v.trim())){return;}
+    const r=q.fields.map((f,i)=>f.ans.map(norm).includes(norm(vals[i])));
+    ok=r.every(Boolean);given=vals.map(v=>v.trim()||'(빈칸)').join(' / ');
+    if(!ok)msg='아직 맞지 않은 칸이 있어요: '+q.fields.map((f,i)=>r[i]?null:f.label).filter(Boolean).join(', ');
+  }else if(q.type==='multi'){
+    const sel=[...card.querySelectorAll('.opt.sel')].map(b=>b.dataset.v).sort();
+    if(!sel.length)return;
+    ok=JSON.stringify(sel)===JSON.stringify(q.answer.slice().sort());given=sel.join(', ');
+    if(!ok)msg=sel.length<q.answer.length?'빠뜨린 것이 있거나 틀린 것이 있어요.':'다시 확인해 보세요.';
+  }else{
+    const sel=chipState[q.id]||[];if(!sel.length)return;
+    ok=q.accept.some(s=>JSON.stringify(s)===JSON.stringify(sel));
+    given=sel.map(id=>q.chips.find(c=>c.id===id).t).join(' ');
+    if(!ok)msg='문장의 내용이나 순서를 다시 생각해 보세요.';
+  }
+  const a=rec(q);a.tries++;a.log=(a.log||[]).concat([{t:Date.now(),a:given,ok}]).slice(-8);
+  if(ok){a.correct=true;a.lastResult='';if(!a.firstCorrectAt)a.firstCorrectAt=Date.now();}
+  else a.lastResult=msg;
+  save(q);redraw(q);
+}
+
+/* ============================================================
+   8. 교사 화면
+   ============================================================ */
+let T={roster:{},att:{},cls:null,lesson:'L1',tab:'grid',unsub:null};
+async function teacherLogin(){
+  const pw=prompt('교사 비밀번호를 입력하세요. (처음이면 새 비밀번호를 정하세요)');
+  if(!pw)return;
+  const h=await sha(pw), ref=db.collection('config').doc('teacher');
+  const d=await ref.get();
+  if(!d.exists){await ref.set({pw:h});}
+  else if(d.data().pw!==h){alert('비밀번호가 맞지 않습니다.');return;}
+  await loadRoster();startTeacher();
+}
+async function loadRoster(){
+  T.roster={};const r=await db.collection('roster').get();
+  r.forEach(d=>T.roster[d.id]=d.data());
+  const cl=classes();if(!T.cls||!cl.includes(T.cls))T.cls=cl[0]||null;
+}
+const classes=()=>[...new Set(Object.keys(T.roster).map(clsOf))].sort();
+function startTeacher(){
+  if(T.unsub)T.unsub();
+  T.unsub=db.collection('attempts').onSnapshot(s=>{
+    T.att={};s.forEach(d=>{const x=d.data();T.att[x.sid+'_'+x.qid]=x;});
+    if(T.tab==='grid')drawTeacher();
+  });
+  drawTeacher();
+}
+function stat(a){if(!a)return'none';if(a.correct)return a.tries>1?'retry':'ok';return'wrong';}
+function drawTeacher(){
+  let h=`<div class="top"><h1>교사 화면</h1><button id="tout">나가기</button></div><div class="wrap">`;
+  h+=`<div class="tabs"><button data-tab="grid" class="${T.tab==='grid'?'on':''}">현황판</button><button data-tab="roster" class="${T.tab==='roster'?'on':''}">명단 관리</button></div>`;
+  if(T.tab==='grid')h+=gridHtml();else h+=rosterHtml();
+  h+='</div><div id="modal"></div>';
+  $('#app').innerHTML=h;
+  $('#tout').onclick=()=>{if(T.unsub)T.unsub();T.unsub=null;showLogin();};
+  document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=async()=>{T.tab=b.dataset.tab;if(T.tab==='roster')await loadRoster();drawTeacher();});
+  if(T.tab==='grid'){
+    document.querySelectorAll('[data-cls]').forEach(b=>b.onclick=()=>{T.cls=b.dataset.cls;drawTeacher();});
+    document.querySelectorAll('[data-les]').forEach(b=>b.onclick=()=>{T.lesson=b.dataset.les;drawTeacher();});
+    document.querySelectorAll('td[data-q]').forEach(td=>td.onclick=()=>detail(td.dataset.s,td.dataset.q));
+  }else{
+    $('#rgo').onclick=saveRoster;
+    const del=$('#rdel');if(del)del.onclick=delClass;
+  }
+}
+function gridHtml(){
+  const cl=classes();
+  if(!cl.length)return `<div class="card">등록된 명단이 없습니다. <b>명단 관리</b> 탭에서 학생 명단을 먼저 등록하세요.</div>`;
+  const les=LESSONS.find(l=>l.id===T.lesson)||LESSONS[0], qs=les.questions;
+  const stu=Object.entries(T.roster).filter(([id])=>clsOf(id)===T.cls).sort((a,b)=>a[0].localeCompare(b[0]));
+  let h=`<div class="tabs">${cl.map(c=>`<button data-cls="${c}" class="${c===T.cls?'on':''}">${c}반</button>`).join('')}</div>`;
+  h+=`<div class="tabs">${LESSONS.filter(l=>l.questions.length).map(l=>`<button data-les="${l.id}" class="${l.id===T.lesson?'on':''}">${l.id.slice(1)}차시</button>`).join('')}</div>`;
+  h+=`<div class="legend"><span class="c-ok">한 번에 정답</span><span class="c-retry">재시도 후 정답</span><span class="c-wrong">오답 진행 중</span><span class="c-none">미응시</span> <small>(칸을 누르면 상세)</small></div><div class="scroll" style="margin-top:8px"><table class="grid"><tr><th>학번</th><th>이름</th>${qs.map(q=>`<th title="${esc(q.ref)}">${esc(q.short)}</th>`).join('')}<th>정답</th></tr>`;
+  const sym={ok:'✔',retry:'↻',wrong:'✖',none:'–'};
+  const cnt=qs.map(()=>0);
+  stu.forEach(([id,s])=>{
+    let c=0;
+    h+=`<tr><td>${id}</td><td class="name">${esc(s.name)}</td>`;
+    qs.forEach((q,i)=>{const a=T.att[id+'_'+q.id],st=stat(a);if(a?.correct){c++;cnt[i]++;}
+      h+=`<td class="c-${st}" data-s="${id}" data-q="${q.id}">${sym[st]}${a&&a.tries?`<small> ${a.tries}</small>`:''}</td>`;});
+    h+=`<td>${c}/${qs.length}</td></tr>`;
+  });
+  h+=`<tr><th colspan="2">정답률</th>${cnt.map(c=>{const p=stu.length?Math.round(c/stu.length*100):0;return `<th style="${p<50?'background:#ffd6d6':''}">${p}%</th>`}).join('')}<th></th></tr></table></div>`;
+  return h;
+}
+function detail(sid,qid){
+  const q=ALLQ.find(x=>x.id===qid), a=T.att[sid+'_'+qid], s=T.roster[sid];
+  const log=(a?.log||[]).map(l=>`<div style="padding:4px 0;border-bottom:1px solid var(--line)">${l.ok?'✔':'✖'} <small>${fmtT(l.t)}</small> — ${esc(l.a)}</div>`).join('')||'<p>아직 제출 기록이 없습니다.</p>';
+  $('#modal').innerHTML=`<div class="modal" id="mo"><div><h3>${esc(s.name)} · ${esc(q.ref)}</h3><p>${esc(q.text)}</p>
+  <p>시도 ${a?.tries||0}회 · 힌트 ${a?.hints||0}단계</p>${log}<p style="margin-top:12px"><button class="btn sm" id="mx">닫기</button></p></div></div>`;
+  $('#mx').onclick=()=>{$('#modal').innerHTML=''};$('#mo').onclick=e=>{if(e.target.id==='mo')$('#modal').innerHTML=''};
+}
+function rosterHtml(){
+  const cl=classes();
+  let h=`<div class="card"><b>명단 등록</b><p style="color:var(--mut);font-size:15px">엑셀에서 <b>학번, 이름</b> 두 열을 복사해서 붙여넣으세요. 같은 학번은 덮어씁니다. (반은 학번의 앞부분으로 자동 구분: 10305 → 103반 5번)</p>
+  <textarea id="rta" rows="8" placeholder="10301&#9;홍길동&#10;10302&#9;김철수"></textarea>
+  <div class="err" id="rerr"></div><button class="btn" id="rgo">등록</button></div>`;
+  h+=`<div class="card"><b>현재 명단</b><p>${cl.length?cl.map(c=>`${c}반 ${Object.keys(T.roster).filter(i=>clsOf(i)===c).length}명`).join(' · '):'비어 있음'}</p>
+  ${cl.length?`<div class="row"><select id="rsel">${cl.map(c=>`<option>${c}</option>`).join('')}</select><button class="btn sub sm" id="rdel">이 반 명단 삭제</button></div>`:''}</div>`;
+  return h;
+}
+async function saveRoster(){
+  const lines=$('#rta').value.split('\n').map(l=>l.trim()).filter(Boolean);
+  const rows=[];
+  for(const l of lines){const p=l.split(/[\t,]+|\s+/).filter(Boolean);if(p.length<2||!/^\d{4,6}$/.test(p[0])){$('#rerr').textContent='형식 오류: '+l;return;}rows.push([p[0],p.slice(1).join('')]);}
+  if(!rows.length){$('#rerr').textContent='붙여넣은 내용이 없습니다.';return;}
+  const b=db.batch();rows.forEach(([id,name])=>b.set(db.collection('roster').doc(id),{id,name}));
+  await b.commit();await loadRoster();drawTeacher();
+}
+async function delClass(){
+  const c=$('#rsel').value;if(!confirm(c+'반 명단을 삭제할까요? (풀이 기록은 남습니다)'))return;
+  const b=db.batch();Object.keys(T.roster).filter(i=>clsOf(i)===c).forEach(i=>b.delete(db.collection('roster').doc(i)));
+  await b.commit();await loadRoster();drawTeacher();
+}
+
+init();
+</script>
+</body>
+</html>
