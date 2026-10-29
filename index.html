@@ -50,6 +50,12 @@ input:focus,textarea:focus{outline:none;border-color:var(--g)}
 .hint{background:#fff8dc;border-left:4px solid #e8b800;padding:8px 12px;margin:6px 0;border-radius:6px;font-size:15px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .act{background:#f0f7ff;border:2px dashed #8ab6e6;border-radius:12px;padding:20px;text-align:center;color:#3b6aa0}
+.fig{position:relative;container-type:inline-size;margin:4px 0}
+.fig img{width:100%;display:block;border-radius:8px;border:1px solid var(--line);cursor:zoom-in}
+.fig input.ov{position:absolute;box-sizing:border-box;padding:0;min-width:0;max-width:none;text-align:center;font-size:3.6cqw;border:2px solid var(--g);background:#fffffff2;border-radius:6px}
+.zoomhint{font-size:13px;color:var(--mut);margin:2px 0 6px}
+.zoom{position:fixed;inset:0;background:#000c;z-index:30;display:flex;align-items:center;justify-content:center;cursor:zoom-out}
+.zoom img{max-width:96vw;max-height:94vh;background:#fff;border-radius:8px}
 .figure{background:#fafafa;border:1px dashed var(--line);border-radius:10px;padding:10px;color:var(--mut);font-size:14px;margin:6px 0}
 /* teacher */
 table.grid{border-collapse:collapse;font-size:15px}
@@ -96,42 +102,42 @@ const LESSONS = [
   { id:'L1', title:'1차시 · 7.0 준비 + 7.1 다면체의 뜻', page:'208~214쪽',
     activity:'여기에 3D 도형 활동(면·모서리·꼭짓점 클릭해서 세기)이 들어갑니다. 다음 단계에서 추가합니다.',
     questions:[
-    { id:'1-p1a', short:'준비1⑴', ref:'208쪽 준비해요 1⑴', text:'교과서 208쪽 그림 ⑴ 입체도형에 대해 표를 완성하시오.',
+    { id:'1-p1a', img:'img/p208-1a.png', size:[496,228], short:'준비1⑴', ref:'208쪽 준비해요 1⑴', text:'교과서 208쪽 그림 ⑴ 입체도형에 대해 표를 완성하시오.',
       type:'fields', fields:[
-        {label:'입체도형의 이름', ans:['삼각기둥']},
-        {label:'밑면의 모양', ans:['삼각형']},
-        {label:'밑면의 개수', ans:['2']} ],
+        {label:'입체도형의 이름', ans:['삼각기둥'], pos:[291,106,148,33]},
+        {label:'밑면의 모양', ans:['삼각형'], pos:[291,142,148,32]},
+        {label:'밑면의 개수', ans:['2'], pos:[291,177,148,32]} ],
       hints:['밑면은 서로 평행하고 합동인 면이에요.','그림 ⑴의 위아래 면은 어떤 다각형인가요?','기둥의 이름은 "밑면의 모양 + 기둥"으로 붙여요.'] },
-    { id:'1-p1b', short:'준비1⑵', ref:'208쪽 준비해요 1⑵', text:'교과서 208쪽 그림 ⑵ 입체도형에 대해 표를 완성하시오.',
+    { id:'1-p1b', img:'img/p208-1b.png', size:[496,231], short:'준비1⑵', ref:'208쪽 준비해요 1⑵', text:'교과서 208쪽 그림 ⑵ 입체도형에 대해 표를 완성하시오.',
       type:'fields', fields:[
-        {label:'입체도형의 이름', ans:['원뿔']},
-        {label:'밑면의 모양', ans:['원']},
-        {label:'밑면의 개수', ans:['1']} ],
+        {label:'입체도형의 이름', ans:['원뿔'], pos:[291,104,148,32]},
+        {label:'밑면의 모양', ans:['원'], pos:[291,138,148,32]},
+        {label:'밑면의 개수', ans:['1'], pos:[291,173,148,32]} ],
       hints:['뿔은 밑면이 한 개예요.','밑면은 둥근 모양이에요.','꼭짓점이 하나이고 밑면이 원인 입체도형이에요.'] },
-    { id:'1-p2', short:'준비2', ref:'208쪽 준비해요 2', text:'전개도로 만든 직육면체(가로 4cm, 세로 2cm, 높이 5cm)의 겉넓이와 부피를 각각 구하시오.',
+    { id:'1-p2', img:'img/p208-2.png', size:[457,324], short:'준비2', ref:'208쪽 준비해요 2', text:'전개도로 만든 직육면체(가로 4cm, 세로 2cm, 높이 5cm)의 겉넓이와 부피를 각각 구하시오.',
       type:'fields', fields:[
         {label:'겉넓이 (cm²)', ans:['76']},
         {label:'부피 (cm³)', ans:['40']} ],
       hints:['직육면체의 부피 = 가로 × 세로 × 높이','겉넓이는 서로 합동인 면 3쌍의 넓이의 합이에요. 4×2, 2×5, 4×5를 구해 보세요.','겉넓이 = (8 + 10 + 20) × 2'] },
-    { id:'1-p3', short:'준비3', ref:'209쪽 준비해요 3', text:'밑면의 반지름이 3cm, 높이가 5cm인 원기둥의 전개도에서 □ 안에 알맞은 수를 써넣으시오.',
+    { id:'1-p3', img:'img/p209-3.png', size:[495,294], short:'준비3', ref:'209쪽 준비해요 3', text:'밑면의 반지름이 3cm, 높이가 5cm인 원기둥의 전개도에서 □ 안에 알맞은 수를 써넣으시오.',
       type:'fields', fields:[
-        {label:'밑면 원의 반지름 (cm)', ans:['3']},
-        {label:'옆면 세로 (cm)', ans:['5']},
-        {label:'옆면 가로 (cm)', ans:['6π'], unit:'cm'} ],
+        {label:'밑면 원의 반지름 (cm)', ans:['3'], pos:[355,120,30,28]},
+        {label:'옆면 세로 (cm)', ans:['5'], pos:[220,195,28,27]},
+        {label:'옆면 가로 (cm)', ans:['6π'], pos:[341,189,37,27]} ],
       hints:['옆면의 세로는 원기둥의 높이와 같아요.','옆면의 가로는 밑면 원의 둘레와 같아요.','원의 둘레 = 2 × π × 반지름'] },
-    { id:'1-m1a', short:'문제1⑴', ref:'210쪽 문제 1⑴', text:'오각기둥은 몇 면체인지 쓰고, 모서리와 꼭짓점의 개수를 각각 구하시오.',
+    { id:'1-m1a', img:'img/p210-1a.png', size:[778,246], short:'문제1⑴', ref:'210쪽 문제 1⑴', text:'오각기둥은 몇 면체인지 쓰고, 모서리와 꼭짓점의 개수를 각각 구하시오.',
       type:'fields', fields:[
         {label:'몇 면체', ans:['칠면체','7면체']},
         {label:'모서리 개수', ans:['15']},
         {label:'꼭짓점 개수', ans:['10']} ],
       hints:['오각기둥의 면은 밑면 2개 + 옆면 몇 개일까요?','밑면(오각형)의 변이 5개씩이고, 옆면 사이의 모서리도 있어요.','모서리 = 5 + 5 + 5, 꼭짓점 = 5 + 5'] },
-    { id:'1-m1b', short:'문제1⑵', ref:'210쪽 문제 1⑵', text:'사각뿔은 몇 면체인지 쓰고, 모서리와 꼭짓점의 개수를 각각 구하시오.',
+    { id:'1-m1b', img:'img/p210-1b.png', size:[778,246], short:'문제1⑵', ref:'210쪽 문제 1⑵', text:'사각뿔은 몇 면체인지 쓰고, 모서리와 꼭짓점의 개수를 각각 구하시오.',
       type:'fields', fields:[
         {label:'몇 면체', ans:['오면체','5면체']},
         {label:'모서리 개수', ans:['8']},
         {label:'꼭짓점 개수', ans:['5']} ],
       hints:['사각뿔의 면은 밑면 1개 + 옆면 4개예요.','밑면의 변 4개, 꼭짓점과 밑면을 잇는 모서리 4개예요.','꼭짓점 = 밑면의 4개 + 맨 위 1개'] },
-    { id:'1-c1', short:'넓히기', ref:'213쪽 생각 넓히기', text:'교과서 213쪽 오른쪽 다면체의 모든 면은 합동인 정삼각형이다. 이 다면체가 정다면체인지 아닌지 말하고 그 이유를 설명하시오. 조각을 눌러 문장을 완성하세요.',
+    { id:'1-c1', img:'img/p213-c1.png', size:[925,251], short:'넓히기', ref:'213쪽 생각 넓히기', text:'', note:'조각을 눌러 문장을 완성하세요.',
       type:'chips',
       chips:[
         {id:'C', t:'모든 면이 합동인 정삼각형이지만'},
@@ -142,19 +148,42 @@ const LESSONS = [
         {id:'B', t:'정다면체이다.'} ],
       accept:[['C','D','A'],['D','A']],
       hints:['정다면체의 두 조건을 떠올려 보세요: 모든 면이 합동인 정다각형, 각 꼭짓점에 모인 면의 개수가 같다.','그림에서 위·아래 꼭짓점과 가운데 꼭짓점에 모인 면의 개수를 세어 보세요.','첫 번째 조건은 만족하지만 두 번째 조건은 만족하지 않아요.'] },
-    { id:'1-h2a', short:'해결2⑴', ref:'214쪽 해결해요 2⑴', text:'면이 8개인 다면체를 보기에서 모두 고르시오.',
+    { id:'1-h1', img:'img/p214-1.png', size:[458,231], short:'해결1', ref:'214쪽 해결해요 1', text:'',
+      type:'fields', fields:[ {label:'⑴ 몇 면체', ans:['육면체','6면체']}, {label:'⑵ 몇 면체', ans:['칠면체','7면체']} ],
+      hints:['다면체는 면의 개수에 따라 이름을 붙여요.','그림에서 보이는 면과 점선으로 가려진 면을 모두 세어 보세요.','⑵는 정육면체의 한 모서리 부분을 잘라 낸 모양이에요. 새로 생긴 면도 세어 보세요.'] },
+    { id:'1-h2a', img:'img/p214-2a.png', size:[518,290], short:'해결2⑴', ref:'214쪽 해결해요 2⑴', text:'면이 8개인 다면체를 보기에서 모두 고르시오.',
       type:'multi', options:[['ㄱ','ㄱ. 삼각기둥'],['ㄴ','ㄴ. 칠각뿔'],['ㄷ','ㄷ. 오각뿔대'],['ㄹ','ㄹ. 육각뿔대'],['ㅁ','ㅁ. 정십이면체'],['ㅂ','ㅂ. 정이십면체']],
       answer:['ㄴ','ㄹ'],
       hints:['각 입체도형의 면의 개수를 하나씩 세어 보세요.','n각뿔의 면은 (n+1)개, n각뿔대의 면은 (n+2)개예요.','칠각뿔 = 7+1, 육각뿔대 = 6+2'] },
-    { id:'1-h2b', short:'해결2⑵', ref:'214쪽 해결해요 2⑵', text:'옆면이 직사각형이 아닌 사다리꼴인 다면체를 보기에서 모두 고르시오.',
+    { id:'1-h2b', img:'img/p214-2b.png', size:[518,293], short:'해결2⑵', ref:'214쪽 해결해요 2⑵', text:'옆면이 직사각형이 아닌 사다리꼴인 다면체를 보기에서 모두 고르시오.',
       type:'multi', options:[['ㄱ','ㄱ. 삼각기둥'],['ㄴ','ㄴ. 칠각뿔'],['ㄷ','ㄷ. 오각뿔대'],['ㄹ','ㄹ. 육각뿔대'],['ㅁ','ㅁ. 정십이면체'],['ㅂ','ㅂ. 정이십면체']],
       answer:['ㄷ','ㄹ'],
       hints:['옆면이 사다리꼴인 입체도형의 종류를 떠올려 보세요.','기둥의 옆면은 직사각형, 뿔의 옆면은 삼각형이에요.','각뿔대의 옆면이 사다리꼴이에요.'] },
-    { id:'1-h2c', short:'해결2⑶', ref:'214쪽 해결해요 2⑶', text:'모든 면이 삼각형인 다면체를 보기에서 모두 고르시오.',
+    { id:'1-h2c', img:'img/p214-2c.png', size:[518,296], short:'해결2⑶', ref:'214쪽 해결해요 2⑶', text:'모든 면이 삼각형인 다면체를 보기에서 모두 고르시오.',
       type:'multi', options:[['ㄱ','ㄱ. 삼각기둥'],['ㄴ','ㄴ. 칠각뿔'],['ㄷ','ㄷ. 오각뿔대'],['ㄹ','ㄹ. 육각뿔대'],['ㅁ','ㅁ. 정십이면체'],['ㅂ','ㅂ. 정이십면체']],
       answer:['ㅂ'],
       hints:['밑면까지 포함해서 모든 면이 삼각형이어야 해요.','칠각뿔의 밑면은 칠각형이에요.','정다면체 중에서 면이 정삼각형인 것을 떠올려 보세요.'] },
-    { id:'1-h5', short:'해결5⑴', ref:'214쪽 해결해요 5⑴', text:'모든 면이 정삼각형이고, 한 꼭짓점에 모인 면이 3개인 정다면체의 이름을 쓰시오.',
+    { id:'1-h3', img:'img/p214-3.png', size:[498,288], short:'해결3', ref:'214쪽 해결해요 3', text:'',
+      type:'fields', fields:[
+        {label:'⑴ 정다면체의 이름', ans:['정팔면체'], pos:[168,136,132,28]},
+        {label:'⑵ 한 꼭짓점에 모인 면의 개수', ans:['4'], pos:[262,191,60,28]},
+        {label:'⑶ 꼭짓점의 개수', ans:['6'], pos:[160,247,60,28]} ],
+      hints:['전개도를 이루는 정삼각형의 개수를 세어 보세요.','정삼각형이 8개이면 정팔면체예요.','전개도를 접으면 꼭짓점 한 곳에 정삼각형 4개가 모여요.'] },
+    { id:'1-h4', img:'img/p214-4.png', size:[495,443], short:'해결4', ref:'214쪽 해결해요 4 (도전)', text:'',
+      type:'fields', fields:[
+        {label:'⑴ 삼각뿔대 모서리', ans:['9'], pos:[136,173,83,28]},
+        {label:'⑴ 사각뿔대 모서리', ans:['12'], pos:[225,173,82,28]},
+        {label:'⑴ 오각뿔대 모서리', ans:['15'], pos:[313,173,83,28]},
+        {label:'⑴ 육각뿔대 모서리', ans:['18'], pos:[402,173,82,28]},
+        {label:'⑴ 삼각뿔대 꼭짓점', ans:['6'], pos:[136,207,83,28]},
+        {label:'⑴ 사각뿔대 꼭짓점', ans:['8'], pos:[225,207,82,28]},
+        {label:'⑴ 오각뿔대 꼭짓점', ans:['10'], pos:[313,207,83,28]},
+        {label:'⑴ 육각뿔대 꼭짓점', ans:['12'], pos:[402,207,82,28]},
+        {label:'⑵ n각뿔대 모서리 개수 (n으로)', ans:['3n','n3']},
+        {label:'⑵ n각뿔대 꼭짓점 개수 (n으로)', ans:['2n','n2']},
+        {label:'⑶ 밑면의 모양', ans:['칠각형']} ],
+      hints:['삼각뿔대: 아랫면 3개 + 윗면 3개 + 옆 모서리 3개로 세어 보세요.','n각뿔대의 모서리는 n + n + n, 꼭짓점은 n + n이에요.','⑶ 3n + 2n = 35 를 풀어 n을 구해 보세요.'] },
+    { id:'1-h5', img:'img/p214-5.png', size:[495,401], short:'해결5⑴', ref:'214쪽 해결해요 5⑴', text:'모든 면이 정삼각형이고, 한 꼭짓점에 모인 면이 3개인 정다면체의 이름을 쓰시오.',
       type:'fields', fields:[{label:'정다면체의 이름', ans:['정사면체']}],
       hints:['정삼각형 3개가 한 꼭짓점에 모이는 경우예요.','정삼각형이 모인 개수가 3, 4, 5개인 세 가지 정다면체가 있어요.','3개가 모이면 가장 면의 수가 적은 정다면체예요.'] }
     ]},
@@ -189,6 +218,7 @@ async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncod
 const clsOf = id=>String(id).slice(0,-2);
 const fmtT = t=>{const d=new Date(t);return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
 
+const draft={};
 let db=null, me=null, myAtt={}, lastInput=null, chipState={}, curLesson=null;
 
 /* ============================================================
@@ -280,12 +310,19 @@ function showLesson(l){
 function mathBar(){return `<div class="mb">${MATH_KEYS.map(k=>`<button type="button" class="mk" data-k="${k}">${k}</button>`).join('')}</div>`;}
 
 function cardHtml(q){
-  const a=myAtt[q.id]||{}, done=!!a.correct;
+  const a=myAtt[q.id]||{}, done=!!a.correct, dr=draft[q.id]||[];
+  const val=(f,i)=>esc(dr[i]!=null?dr[i]:(done?f.ans[0]:''));
   let h=`<div class="qhead"><span class="ref">${esc(q.ref)}</span></div>`;
-  if(q.img)h+=`<img src="${esc(q.img)}" style="max-width:100%;border-radius:8px">`;
-  h+=`<div style="margin:4px 0 8px">${esc(q.text)}</div>`;
+  if(q.img){
+    h+=`<div class="fig" style="max-width:${Math.round((q.size?q.size[0]:500)*1.5)}px"><img class="zm" src="${esc(q.img)}" alt="${esc(q.ref)}">`;
+    if(q.type==='fields'&&q.size)q.fields.forEach((f,i)=>{if(!f.pos)return;const [x,y,w,hh]=f.pos,[iw,ih]=q.size;
+      h+=`<input type="text" class="ans ov" data-q="${q.id}" data-i="${i}" autocomplete="off" aria-label="${esc(f.label)}" value="${val(f,i)}" ${done?'disabled':''} style="left:${x/iw*100}%;top:${y/ih*100}%;width:${w/iw*100}%;height:${hh/ih*100}%">`});
+    h+=`</div><div class="zoomhint">그림을 누르면 크게 볼 수 있어요.</div>`;
+  }
+  if(q.text&&!q.img)h+=`<div style="margin:4px 0 8px">${esc(q.text)}</div>`;
+  if(q.note)h+=`<div style="margin:4px 0 8px;color:var(--mut)">${esc(q.note)}</div>`;
   if(q.type==='fields'){
-    q.fields.forEach((f,i)=>{h+=`<div class="field"><label>${esc(f.label)}</label><input type="text" class="ans" data-q="${q.id}" data-i="${i}" autocomplete="off" ${done?'disabled':''} ${f.unit?`placeholder="${f.unit}"`:''}></div>`});
+    q.fields.forEach((f,i)=>{if(q.img&&q.size&&f.pos)return;h+=`<div class="field"><label>${esc(f.label)}</label><input type="text" class="ans" data-q="${q.id}" data-i="${i}" autocomplete="off" value="${val(f,i)}" ${done?'disabled':''} ${f.unit?`placeholder="${f.unit}"`:''}></div>`});
     if(!done)h+=mathBar();
   }else if(q.type==='multi'){
     h+=`<div class="opts" data-q="${q.id}">${q.options.map(o=>`<button type="button" class="opt" data-v="${o[0]}" ${done?'disabled':''}>${esc(o[1])}</button>`).join('')}</div>`;
@@ -311,7 +348,10 @@ function redraw(q){$('#card-'+q.id).innerHTML=cardHtml(q);}
 function wireLesson(){
   const app=$('#app');
   app.onfocusin=e=>{if(e.target.classList.contains('ans'))lastInput=e.target};
+  app.oninput=e=>{const t=e.target;if(t.classList&&t.classList.contains('ans')){(draft[t.dataset.q]=draft[t.dataset.q]||[])[+t.dataset.i]=t.value;}};
   app.onclick=e=>{
+    if(e.target.classList&&e.target.classList.contains('zm')){
+      const z=document.createElement('div');z.className='zoom';z.innerHTML=`<img src="${e.target.src}">`;z.onclick=()=>z.remove();document.body.appendChild(z);return;}
     const t=e.target.closest('button');if(!t)return;
     if(t.classList.contains('mk')){
       const k=t.dataset.k, card=t.closest('.card');
@@ -319,7 +359,7 @@ function wireLesson(){
       if(!inp||inp.disabled)return;
       const s=inp.selectionStart??inp.value.length, en=inp.selectionEnd??s;
       inp.value=inp.value.slice(0,s)+k+inp.value.slice(en);
-      inp.focus();const p=s+k.length;inp.setSelectionRange(p,p);lastInput=inp;return;
+      inp.focus();const p=s+k.length;inp.setSelectionRange(p,p);lastInput=inp;(draft[inp.dataset.q]=draft[inp.dataset.q]||[])[+inp.dataset.i]=inp.value;return;
     }
     if(t.classList.contains('opt')&&!t.disabled){t.classList.toggle('sel');return;}
     if(t.classList.contains('chip')&&t.dataset.c){
@@ -351,7 +391,7 @@ function useHint(q){
 function submitAns(q){
   const card=$('#card-'+q.id);let ok=false,given='',msg='';
   if(q.type==='fields'){
-    const vals=[...card.querySelectorAll('input.ans')].map(i=>i.value);
+    const vals=q.fields.map((f,i)=>{const e=card.querySelector(`input.ans[data-i="${i}"]`);return e?e.value:''});
     if(vals.every(v=>!v.trim())){return;}
     const r=q.fields.map((f,i)=>f.ans.map(norm).includes(norm(vals[i])));
     ok=r.every(Boolean);given=vals.map(v=>v.trim()||'(빈칸)').join(' / ');
@@ -377,11 +417,35 @@ function submitAns(q){
    8. 교사 화면
    ============================================================ */
 let T={roster:{},att:{},cls:null,lesson:'L1',tab:'grid',unsub:null};
+function askPw(first){
+  return new Promise(res=>{
+    const m=document.createElement('div');m.className='modal';
+    m.innerHTML=`<div style="max-width:360px"><h3 style="margin-top:0">${first?'교사 비밀번호 새로 정하기':'교사 비밀번호'}</h3>
+    <input type="password" id="pw1" placeholder="${first?'새 비밀번호':'비밀번호'}" autocomplete="off">
+    ${first?'<div style="height:8px"></div><input type="password" id="pw2" placeholder="한 번 더 입력" autocomplete="off">':''}
+    <label style="display:block;margin:8px 0;font-size:14px"><input type="checkbox" id="pws"> 비밀번호 보이기</label>
+    <div class="err" id="pwe"></div>
+    <div class="row"><button class="btn" id="pwok">확인</button><button class="btn sub" id="pwno">취소</button></div></div>`;
+    document.body.appendChild(m);
+    const i1=m.querySelector('#pw1'),i2=m.querySelector('#pw2');i1.focus();
+    m.querySelector('#pws').onchange=e=>{i1.type=e.target.checked?'text':'password';if(i2)i2.type=i1.type;};
+    const done=v=>{m.remove();res(v)};
+    const ok=()=>{
+      if(!i1.value){m.querySelector('#pwe').textContent='비밀번호를 입력하세요.';return;}
+      if(first){if(i1.value.length<4){m.querySelector('#pwe').textContent='4자 이상으로 정하세요.';return;}
+        if(i1.value!==i2.value){m.querySelector('#pwe').textContent='두 번 입력한 비밀번호가 달라요.';return;}}
+      done(i1.value);
+    };
+    m.querySelector('#pwok').onclick=ok;m.querySelector('#pwno').onclick=()=>done(null);
+    m.onkeydown=e=>{if(e.key==='Enter')ok();};
+  });
+}
 async function teacherLogin(){
-  const pw=prompt('교사 비밀번호를 입력하세요. (처음이면 새 비밀번호를 정하세요)');
-  if(!pw)return;
-  const h=await sha(pw), ref=db.collection('config').doc('teacher');
+  const ref=db.collection('config').doc('teacher');
   const d=await ref.get();
+  const pw=await askPw(!d.exists);
+  if(!pw)return;
+  const h=await sha(pw);
   if(!d.exists){await ref.set({pw:h});}
   else if(d.data().pw!==h){alert('비밀번호가 맞지 않습니다.');return;}
   await loadRoster();startTeacher();
